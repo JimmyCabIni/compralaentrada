@@ -11,6 +11,8 @@ Route::post('products', [ProductController::class, 'store'])->middleware('auth:s
 Route::put('products/{id}', [ProductController::class, 'update'])->middleware('auth:sanctum');
 Route::delete('products/{id}', [ProductController::class, 'destroy'])->middleware('auth:sanctum');
 
+Route::post('products/{id}/categories', [ProductController::class, 'assignCategories'])->middleware('auth:sanctum');
+
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');

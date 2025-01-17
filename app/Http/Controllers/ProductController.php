@@ -83,4 +83,21 @@ class ProductController extends Controller
 
         return response()->json(['message' => 'Product deleted'], 200);
     }
+
+    public function assignCategories(Request $request, $id)
+    {
+        $validated = $request->validate([
+            'category_ids' => 'required|array',
+            'category_ids.*' => 'exists:categories,id'
+        ]);
+
+        $product = Product::findOrFail($id);
+
+        $product->categories()->sync($validated['category_ids']);
+
+        return response()->json([
+            'message' => 'Categories assigned succesfully',
+            'product' => $product->load('categories')
+        ]);
+    }
 }
