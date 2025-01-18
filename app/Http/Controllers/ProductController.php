@@ -10,9 +10,21 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        return response()->json(Product::paginate(5), 200);
+        $query = Product::query();
+
+        if (!is_null($request['name'])) {
+            $query->where('name', 'LIKE', "%{$request['name']}%");
+        }
+
+        if (!is_null($request['price'])) {
+            $query->where('price', $request['price']);
+        }
+
+        $products = $query->paginate(10);
+
+        return response()->json($products, 200);
     }
 
     /**
