@@ -18,7 +18,7 @@ class CategorySeeder extends Seeder
 
         foreach (range(1, 12) as $index) {
             Category::create([
-                'name' => $faker->word,
+                'name' => $faker->unique()->word,
             ]);
         }
     }
