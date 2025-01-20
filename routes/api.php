@@ -13,6 +13,6 @@ Route::delete('products/{id}', [ProductController::class, 'destroy'])->middlewar
 
 Route::post('products/{id}/categories', [ProductController::class, 'assignCategories'])->middleware('auth:sanctum');
 
-Route::post('/register', [AuthController::class, 'register']);
+Route::post('/register', [AuthController::class, 'register'])->middleware('auth:sanctum');
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');

@@ -91,7 +91,7 @@ class ProductController extends Controller
             return response()->json(['message' => 'Product not found'], 404);
         }
 
-        $product->delete($product);
+        $product->delete();
 
         return response()->json(['message' => 'Product deleted'], 200);
     }
