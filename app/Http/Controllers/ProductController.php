@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Discount;
 use Illuminate\Http\Request;
 use App\Models\Product;
 
@@ -110,6 +111,15 @@ class ProductController extends Controller
         return response()->json([
             'message' => 'Categories assigned succesfully',
             'product' => $product->load('categories')
+        ]);
+    }
+
+    public function showDiscount(string $id){
+        $product = Product::find($id);
+        $priceWithDiscount = $product->getPriceWithDiscount();
+
+        return response()->json([
+            'price_with_discount' => $priceWithDiscount
         ]);
     }
 }

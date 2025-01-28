@@ -20,4 +20,18 @@ class Product extends Model
     {
         return $this->belongsToMany(Category::class, 'category_product');
     }
+
+    public function discounts()
+    {
+        return $this->belongsTo(Discount::class, 'discount_id');
+    }
+
+    public function getPriceWithDiscount()
+    {
+        if ($this->discounts) {
+            $discount = $this->discounts->percentage;
+            return $this->price - ($this->price * $discount / 100);
+        }
+        return $this->price;
+    }
 }
