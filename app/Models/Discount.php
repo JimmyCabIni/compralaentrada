@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Discount extends Model
 {
     protected $fillable = [
-        "porcentaje"
+        "percentage",
     ];
 
     public function products()
